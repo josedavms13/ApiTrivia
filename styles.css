@@ -1,0 +1,29 @@
+body{
+    background-color: rgb(44, 37, 46);
+    color: white;
+    margin: 10%;
+}
+
+
+header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+
+.working-on{
+    background-color: cornflowerblue;
+}
+
+.hide{
+    display: none;
+}
+
+.center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    
+    text-align: center;
+}
