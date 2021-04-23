@@ -1,9 +1,12 @@
+import AnswerCheck from "./AnswerCheck.js";
 export default
+class RoundSystem {
 
-class GettingQuestionsFromAPI{
+    constructor(CurrentLvl, ) {
+        this.dificultystate = CurrentLvl;
 
-    constructor(difficultyAsked) {
-        this.dificultystate = difficultyAsked;
+        this.output = [];
+
 
         switch (this.dificultystate){
             case 1 :
@@ -17,14 +20,12 @@ class GettingQuestionsFromAPI{
                 break
             case 3 :
                 console.log('Requested HARD');
-                this.harQuestions();
+                this.hardQuestions();
                 break
 
         }
 
     }
-
-
 
     easyQuestions(){
         fetch('https://opentdb.com/api.php?amount=3&difficulty=easy',{
@@ -42,7 +43,7 @@ class GettingQuestionsFromAPI{
             .then(data => this.setQuestions(data.results))
     }
 
-    harQuestions(){
+    hardQuestions(){
         fetch('https://opentdb.com/api.php?amount=3&difficulty=hard',{
             method : 'GET',
         })
@@ -51,8 +52,12 @@ class GettingQuestionsFromAPI{
 
     }
 
+
     setQuestions(data){
-        console.log(data);
+        data.forEach((data)=> this.output.push((data)))
+        this.output = data;
+        // console.log(data);
+
     }
 
 }
