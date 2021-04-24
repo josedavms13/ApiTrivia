@@ -9,23 +9,28 @@
 
 const levelingSystem = {
 
-  run: (answersArray, level, stack_value) => {
+  run: (answersArray, level, levelInStorage, stack_value) => {
     const answersSum = answersArray.reduce((a, b) => a + b, 0);
     switch (answersSum) {
       case 3:
         const nextLevel1 = levelingSystem.limitLevel(level=level+1);
+        localStorage.setItem(levelInStorage, JSON.stringify(nextLevel1));
         return [nextLevel1, (stack_value = 0)];
       case 2:
         if (stack_value === 0) {
+          localStorage.setItem(levelInStorage, JSON.stringify(level));
           return [level, (stack_value = 1)];
         } else {
           const nextLevel2 = levelingSystem.limitLevel(level=level+1);
+          localStorage.setItem(levelInStorage, JSON.stringify(nextLevel2));
           return [nextLevel2, (stack_value = 0)];
         }
       case 1:
+        localStorage.setItem(levelInStorage, JSON.stringify(level));
         return [level, (stack_value = 0)];
       case 0:
         const nextLevel3 = levelingSystem.limitLevel(level=level-1);
+        localStorage.setItem(levelInStorage, JSON.stringify(nextLevel3));
         return [nextLevel3, (stack_value = 0)];
     }
   },
