@@ -2,7 +2,7 @@ import AnswerCheck from "./AnswerCheck.js";
 export default
     class RoundSystem {
 
-    constructor(CurrentLvl,) {
+    constructor(CurrentLvl) {
         this.dificultystate = CurrentLvl;
 
         this.output = {};
