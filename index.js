@@ -18,6 +18,23 @@ let CHECKER = null
 //---------------------------------------------------------------
 
 // const Questions = new RoundSystem(3);
+localStorage.setItem("level", 2)
+
+function mode1Handler(){
+    const storageLevel = localStorage.getItem("level");
+    if(storageLevel === null ){
+        /* console.log("No había level guardado")
+        console.log("--------------------------------") */
+        ModeChanger(1,1);
+    }else{
+        /* console.log(`El level guardado es: ${storageLevel}`)
+        console.log("--------------------------------") */
+        ModeChanger(1, storageLevel);
+    }
+}
+
+
+
 
 ///
 function ModeChanger(mode, parameters) {
@@ -112,3 +129,11 @@ ModeChanger(1, 1);
 
 
 //#endregion toTEST
+
+
+
+
+//#region HTML EVENT HANDLER
+document.getElementById("GameMode1-start").addEventListener("click", mode1Handler);
+
+//#endregion   html even Handler    
