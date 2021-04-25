@@ -19,6 +19,7 @@ let CHECKER = null
 
 // const Questions = new RoundSystem(3);
 
+///
 function ModeChanger(mode, parameters) {
     let Questions = null
     if(mode === 1){
@@ -45,16 +46,16 @@ function ModeChanger(mode, parameters) {
 
             ///---- > Here is hapens AFTER! the object is created.
 
-            console.log(QUESTIONS_OBJECT);
+            console.log(QUESTIONS_OBJECT.Questions);
 
             // CHECKER = new AnswerCheck(testAnswers, toTestObject.CorrectAnswers);
 
 
 
 
-        }, 2000)
+        }, 1000)
 
-    }, 2000)
+    }, 3000)
 }
 
 //---------------------------------------------------------------
@@ -94,18 +95,20 @@ const testAnswers = [toTestObject.IncorrectAnswers[1][0], toTestObject.CorrectAn
 
 //#region  ModeSwitcher
 
-// ModeChanger(1, 1);
+// ModeChanger(mode, lvl);
+ModeChanger(1, 1);
 
 
 // MODE 2
 // const parametersToMode2= [1, 'Science: Computers', 2];
 
-// ModeChanger(2, parametersToMode2);
+// ModeChanger(mode, parametersToMode2);
 
 
 
 
 //#endregion modeSwitcher
+
 
 
 //#endregion toTEST
