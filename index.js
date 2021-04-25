@@ -69,7 +69,7 @@ function ModeChanger(mode, parameters) {
 
 
 
-//#region  TO TEST
+//#region  TO TEST AND CONNECT
 
 //#region  Checking System
 const toTestObject = { 
@@ -94,7 +94,7 @@ const testAnswers = [toTestObject.IncorrectAnswers[1][0], toTestObject.CorrectAn
 
 //#region  ModeSwitcher
 
-ModeChanger(1, 1);
+// ModeChanger(1, 1);
 
 
 // MODE 2
