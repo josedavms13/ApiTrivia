@@ -76,11 +76,8 @@ export default
         for (let i = 0; i < 3; i++) {
             questionsToExport.push((data[i].question));
         }
-        //console.log(questionsToExport);
 
         this.output.Questions = questionsToExport;
-
-        // //console.log(this.output);
 
     }
 
@@ -90,24 +87,19 @@ export default
 
         data.forEach((element) => questionsToExport.push(element.correct_answer))
 
-        // //console.log(questionsToExport);
 
         this.output.CorrectAnswers = questionsToExport;
 
-        // //console.log(this.output);
     }
 
     setCategory(data) {
-        // //console.log(data);
         const questionsToExport = [];
 
         data.forEach((element) => questionsToExport.push(element.category))
 
-        // //console.log(questionsToExport);
 
         this.output.Categories = questionsToExport;
 
-        // //console.log(this.output);
     }
 
     setWrongAnswers(data){
@@ -115,7 +107,6 @@ export default
 
         data.forEach((element) => questionsToExport.push(element.incorrect_answers))
 
-        // //console.log(questionsToExport);
 
         this.output.IncorrectAnswers = questionsToExport;
 

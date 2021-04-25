@@ -27,6 +27,7 @@ class RoundSystemMode2{
         this.category = arrayOfParameters[1];
         this.type = arrayOfParameters[2];
 
+        this.output = {};
     // https://opentdb.com/api.php?amount=3&category=12&difficulty=medium&type=multiple  
 
         this.customURL = 'https://opentdb.com/api.php?amount=3';
@@ -78,7 +79,7 @@ class RoundSystemMode2{
 
 
 
-        console.log(this.customURL);
+        // console.log(this.customURL);
 
         this.setDifficulty();
     }
@@ -114,24 +115,72 @@ class RoundSystemMode2{
 
 
 
-
-
-
-
     getFilteredQuesitons(){
-        console.log(this.customURL)
+
+
+        console.log(this.customURL);
+
         fetch(this.customURL, {
             method : 'GET',
         }).then(result => result.json())
-        .then(data=> console.log(data))
+        .then(data => {
+            this.setQuestions(data.results);
+            this.setAnswers(data.results);
+            this.setCategoryToShow(data.results);
+            this.setWrongAnswers(data.results);
+        })
+
     }   
 
+    setQuestions(data){
 
 
+        const questionsToExport = [];
+
+        for (let i = 0; i < 3; i++) {
+            questionsToExport.push((data[i].question));
+        }
+
+        this.output.Questions = questionsToExport;
 
 
+    }
 
 
+    setAnswers(data) {
+
+        const questionsToExport = [];
+
+        data.forEach((element) => questionsToExport.push(element.correct_answer))
+
+
+        this.output.CorrectAnswers = questionsToExport;
+
+    }
+
+
+    setCategoryToShow(data){
+        const questionsToExport = [];
+
+        data.forEach((element) => questionsToExport.push(element.category))
+
+
+        this.output.Categories = questionsToExport;
+
+    }
+
+    setWrongAnswers(data){
+        const questionsToExport = [];
+
+        data.forEach((element) => questionsToExport.push(element.incorrect_answers))
+
+
+        this.output.IncorrectAnswers = questionsToExport;
+
+    }
+
+
+ 
 
 
 

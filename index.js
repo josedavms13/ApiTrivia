@@ -21,6 +21,9 @@ let CHECKER = null
 
 ///
 function ModeChanger(mode, parameters) {
+
+    console.log(mode);
+
     let Questions = null
     if(mode === 1){
         Questions = new RoundSystem(parameters);
@@ -46,16 +49,16 @@ function ModeChanger(mode, parameters) {
 
             ///---- > Here is hapens AFTER! the object is created.
 
-            console.log(QUESTIONS_OBJECT.Questions);
+            console.log(QUESTIONS_OBJECT);
 
             // CHECKER = new AnswerCheck(testAnswers, toTestObject.CorrectAnswers);
 
 
 
 
-        }, 1000)
+        }, 2000)
 
-    }, 3000)
+    }, 2000)
 }
 
 //---------------------------------------------------------------
@@ -96,7 +99,7 @@ const testAnswers = [toTestObject.IncorrectAnswers[1][0], toTestObject.CorrectAn
 //#region  ModeSwitcher
 
 // ModeChanger(mode, lvl);
-ModeChanger(1, 1);
+// ModeChanger(1, 1);
 
 
 // MODE 2
@@ -112,3 +115,29 @@ ModeChanger(1, 1);
 
 
 //#endregion toTEST
+
+
+const Mode2PlayButton = document.getElementById('GameMode2-start');
+
+Mode2PlayButton.addEventListener("click", getInfoFromHTMLForm)
+
+
+function getInfoFromHTMLForm(){
+
+    
+
+    console.log('clicked')
+    const categorySelector = document.getElementById('Category').value;
+    const levelSelector = document.getElementById('Level').value;
+    const typeSelector = document.getElementById('Type').value;
+
+    const parametersOfMode2= [categorySelector, levelSelector, typeSelector]
+
+    // console.log(parametersOfMode2)
+
+    ModeChanger(2, parametersOfMode2);
+
+
+}
+
+
