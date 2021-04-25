@@ -1,15 +1,11 @@
-import GettingQuestionsFromAPI from "./Classes/GettingQuestionsFromAPI.js";
+import RoundSystem from "./Classes/RoundSystem.js";
+import AnswerCheck from "./Classes/AnswerCheck.js";
 
 
-const Questions = new GettingQuestionsFromAPI(1);
+const Questions = new RoundSystem(2);
+const check = new AnswerCheck()
+
+console.log(Questions.output)
 
 
 
-function modeSelector(id, mode){
-    if(mode === 1){
-        //play normlal
-    }else{
-
-    }
-
-}
