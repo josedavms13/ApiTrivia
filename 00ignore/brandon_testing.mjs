@@ -1,5 +1,19 @@
 import levelingSystem from "../Classes/levelingSystem.mjs";
 import scoreSystem from "../Classes/scoreSystem.mjs";
+import musicLevel from "../Classes/musicLevel.mjs";
+
+
+/* //--------- Prueba de levelMusic
+
+document.getElementById("music").addEventListener("click",music);
+function music() {
+    let level = 3;  
+    musicLevel.play(level);
+    setTimeout(musicLevel.stop, 3000);
+}
+
+//----------End Prueba ------------------- */
+
 
 
 //----- Prueba de scoreSystem ------------
@@ -21,7 +35,7 @@ console.log(score); */
 
 
 
-//----- Prueba de levelingSystem ------------
+/* //----- Prueba de levelingSystem ------------
 let level = 2;
 let answersArray = [1, 1, 1];
 let stack_value = 0;
@@ -34,4 +48,4 @@ console.log(`answersArray: ${answersArray}, level: ${level}, stack_value: ${stac
 
 console.log(`nextLevel: ${nextLevel}, stack_value: ${stack_value}`);
 
-//----- End prueba ------------------
+//----- End prueba ------------------ */
