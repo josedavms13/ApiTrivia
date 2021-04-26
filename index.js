@@ -3,7 +3,7 @@ import RoundSystemMode2 from "./Classes/RoundSystemGameMode2.js"
 import AnswerCheck from "./Classes/AnswerCheck.js";
 import UI from "./Classes/UI.js";
 import DisplayQAs from "./Classes/DisplayQAs.js"
-
+import CategoryFiter from "./Classes/CategoryFiter.js"
 
 //#region GLOBALS
 
@@ -49,6 +49,7 @@ function ModeChanger(mode, parameters) {
 
     }
     if(mode === 2){
+        
         Questions = new RoundSystemMode2(parameters);
     }
 
@@ -59,7 +60,9 @@ function ModeChanger(mode, parameters) {
     setTimeout(() => {
         QUESTIONS_OBJECT = Questions.output;
 
-        /// --- > Here The object we set the object we are going to work with
+        /// --- > Here The QUESTIONS_OBJECT is created
+
+
 
 
 
@@ -69,6 +72,7 @@ function ModeChanger(mode, parameters) {
             ///---- > Here is hapens AFTER! the object is created.
 
             console.log(QUESTIONS_OBJECT);
+
 
             DisplayQAs.run(QUESTIONS_OBJECT);
             //PruebaObject.run(QUESTIONS_OBJECT);
@@ -204,9 +208,9 @@ const testAnswers = [toTestObject.IncorrectAnswers[1][0], toTestObject.CorrectAn
 
 
 // MODE 2
-// const parametersToMode2= [1, 'Science: Computers', 2];
+const parametersToMode2= [1, 'Science: Computers', 2];
 
-// ModeChanger(mode, parametersToMode2);
+// ModeChanger(2, parametersToMode2);
 
 
 
@@ -220,23 +224,7 @@ const testAnswers = [toTestObject.IncorrectAnswers[1][0], toTestObject.CorrectAn
 
 
 
-function getInfoFromHTMLForm(){
 
-    
-
-    console.log('clicked')
-    const categorySelector = document.getElementById('Category').value;
-    const levelSelector = document.getElementById('Level').value;
-    const typeSelector = document.getElementById('Type').value;
-
-    const parametersOfMode2= [categorySelector, levelSelector, typeSelector]
-
-    // console.log(parametersOfMode2)
-
-    ModeChanger(2, parametersOfMode2);
-
-
-}
 
 
 
@@ -246,6 +234,13 @@ document.getElementById("GameMode1-start").addEventListener("click", mode1Handle
 
 const Mode2PlayButton = document.getElementById('GameMode2-start');
 
-Mode2PlayButton.addEventListener("click", getInfoFromHTMLForm)
+Mode2PlayButton.addEventListener("click", Mode2);
+
+function Mode2(){
+    console.log('clicked')
+    ModeChanger(2, CategoryFiter())
+}
+
+// Mode2PlayButton.addEventListener("click", getInfoFromHTMLForm)
 
 //#endregion   html even Handler    

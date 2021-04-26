@@ -5,7 +5,7 @@ class RoundSystemMode2{
     //#region INSTRUCTIONS 
 
         /*
-            Receiving = ['category', 'difficulty', 'type'];
+            Receiving = ['difficulty', 'category', 'type'];
 
             - When we define the categories that will be avalible to filter, have to change the url injection.
 
