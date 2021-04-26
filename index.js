@@ -3,6 +3,8 @@ import RoundSystemMode2 from "./Classes/RoundSystemGameMode2.js"
 import AnswerCheck from "./Classes/AnswerCheck.js";
 import UI from "./Classes/UI.js";
 import DisplayQAs from "./Classes/DisplayQAs.js"
+import GerUserAnswers from "./Classes/GetUserAnswers.js"
+
 
 
 //#region GLOBALS
@@ -71,7 +73,7 @@ function ModeChanger(mode, parameters) {
             console.log(QUESTIONS_OBJECT);
 
             DisplayQAs.run(QUESTIONS_OBJECT);
-            //PruebaObject.run(QUESTIONS_OBJECT);
+            
         
         }, 1000)
 
@@ -93,86 +95,19 @@ function ModeChanger(mode, parameters) {
 
 
 
-//#region  TO TEST AND CONNECT
+//#region  Get Users Answers Function
+const userAnswers = [];
 
-/* function displayQuestionsAnswers(){
-
-    const randomPosition = answersOrder();
-    const allAnswersArray = concatAllAnswers(randomPosition);
-
-    console.log(randomPosition)
-    console.log(all)
-    //----------------------------------------------------
+function getUserAnswers(answer){
     
-    //Ques & Ans 1
-    const Q1 = document.getElementById("Q1");
-    Q1.innerHTML = QUESTIONS_OBJECT.Questions[0];
-    const Answers1 = document.getElementById("Answers1");
-    printAnswers(allAnswersArray[0], "Answers1");
-    console.log("Aquí llega-1")
-
-    //Ques & Ans 2
-    const Q2 = document.getElementById("Q2");
-    Q2.innerHTML = QUESTIONS_OBJECT.Questions[1];
-    const Answers2 = document.getElementById("Answers2");
-    printAnswers(allAnswersArray[1], "Answers2");
-    console.log("Aquí llega-2")
-
-    //Ques & Ans 3
-    const Q3 = document.getElementById("Q3");
-    Q3.innerHTML = QUESTIONS_OBJECT.Questions[2];
-    const Answers3 = document.getElementById("Answers3");
-    printAnswers(allAnswersArray[2], "Answers3");
-    console.log("Aquí llega-3")
-    
-}
-
-
-
-//#region Array completo de repuestas en orden aleatorio 
-function answersOrder(){
-    const incorrectAnswersArray = QUESTIONS_OBJECT.IncorrectAnswers;
-    //console.log(incorrectAnswersArray)
-    const randomPosition = [];
-    for(let i=0; i < 3; i++){
-        if(incorrectAnswersArray[i].length === 3){
-            const randomNotRounded = Math.random()*(3-0);
-            const randomNumber = Math.round(randomNotRounded)
-            //console.log(randomNumber)
-            randomPosition.push(randomNumber);
-
-        }else{
-            randomPosition.push(null);
-        }
+    if(userAnswers.length < 3){
+        userAnswers.push(answer)
     }
-    return(randomPosition)
-    //console.log(randomPosition);
+    console.log(userAnswers);
 }
 
-function concatAllAnswers(randomPosition){
-    const correctAnswersArray = QUESTIONS_OBJECT.CorrectAnswers;
-    const incorrectAnswersArray = QUESTIONS_OBJECT.IncorrectAnswers;
-    const allAnswersArray = incorrectAnswersArray;
-    for(let i=0; i < incorrectAnswersArray.length; i++){
-        if(randomPosition[i] !== null){
-            const randomIndex = randomPosition[i];
-            const correctAnswer = correctAnswersArray[i];
-            allAnswersArray[i].splice(randomIndex, 0, correctAnswer[i]);
-        } else {
-            allAnswersArray[i] = ["True", "False"];
-        }
-    }
-    return allAnswersArray;
-}
 
-function printAnswers(answers, idName){
-    const divAnswers = document.getElementById(idName);
-    for(let i=0; i < answers.length; i++){
-        divAnswers.innerHTML += `<button>${answers[i]}</button>`
-    }
-}
-
-//#endregion  */
+//#endregion  
 
 
 
@@ -247,5 +182,7 @@ document.getElementById("GameMode1-start").addEventListener("click", mode1Handle
 const Mode2PlayButton = document.getElementById('GameMode2-start');
 
 Mode2PlayButton.addEventListener("click", getInfoFromHTMLForm)
+
+window.getUserAnswers = getUserAnswers;
 
 //#endregion   html even Handler    
