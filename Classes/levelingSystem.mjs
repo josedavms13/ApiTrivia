@@ -3,15 +3,13 @@
 // Recibe el arreglo de respuestas correctas [1,0,1], el nivel actual y el stack_value de los intentos actual
 // Devuelve un arreglo con el valor del siguiente nivel y el stack_value de los intentos cuando logra 2/3 respuestas
 
-[nextLevel, stack_value] = levelingSystem.run(answersArray, level, levelInStorage, stack_value);
+[nextLevel, stack_value] = levelingSystem.run(answersArray, level, stack_value);
 
  ---------------------------------------------*/
 
 const levelingSystem = {
 
   run: (answersArray, level, levelInStorage, stack_value) => {
-    console.log('leveling system');
-    console.log(answersArray);
     const answersSum = answersArray.reduce((a, b) => a + b, 0);
     switch (answersSum) {
       case 3:
