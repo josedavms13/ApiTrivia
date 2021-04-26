@@ -3,7 +3,8 @@ import RoundSystemMode2 from "./Classes/RoundSystemGameMode2.js"
 import AnswerCheck from "./Classes/AnswerCheck.js";
 import UI from "./Classes/UI.js";
 import DisplayQAs from "./Classes/DisplayQAs.js"
-
+import CategoryFiter from "./Classes/CategoryFiter.js"
+import musicLevel from "./Classes/musicLevel.js"
 
  
 //#region GLOBALS
@@ -11,7 +12,15 @@ import DisplayQAs from "./Classes/DisplayQAs.js"
 
 let QUESTIONS_OBJECT = null;
 
-let CHECKER = null
+let CHECKER = null;
+
+let ISPLAYING = false;
+
+let SAMESONG= false;
+
+let CURRENT_LVL = null;
+
+let RESET = null;
 //#endregion globals
 
 
@@ -39,18 +48,37 @@ function mode1Handler(){
 
 ///
 function ModeChanger(mode, parameters) {
-
+    ShowCover();
     console.log(mode);
 
     let Questions = null
     if(mode === 1){
         //console.log(parameters)
         Questions = new RoundSystem(parameters);
+
+        
+        //PLAY Music
+        
+        RESET = [mode, parameters];
+        // musicLevel.stop();
+
+        if(CURRENT_LVL !== RESET[1]){
+            console.log('music changes');
+            console.log(CURRENT_LVL);
+            console.log(RESET[1]);
+            // musicLevel.play(parameters);
+            
+        }
+        
+
         //console.log("mode1")
 
     }
     if(mode === 2){
+        
         Questions = new RoundSystemMode2(parameters);
+        RESET = [mode, parameters];
+
     }
 
 
@@ -58,18 +86,24 @@ function ModeChanger(mode, parameters) {
 
 
     setTimeout(() => {
+        
+
         QUESTIONS_OBJECT = Questions.output;
 
-        /// --- > Here The object we set the object we are going to work with
+        /// --- > Here The QUESTIONS_OBJECT is created
+
+
 
 
 
         setTimeout(() => {
-
+            HideCover();
 
             ///---- > Here is hapens AFTER! the object is created.
 
             console.log(QUESTIONS_OBJECT);
+
+
 
             DisplayQAs.run(QUESTIONS_OBJECT);
             
@@ -134,6 +168,7 @@ function placeAnswerInOrder(idName){
         const indexInArray = 2;
         return(indexInArray);
     }
+
 }
 
 
@@ -194,9 +229,9 @@ const testAnswers = [toTestObject.IncorrectAnswers[1][0], toTestObject.CorrectAn
 
 
 // MODE 2
-// const parametersToMode2= [1, 'Science: Computers', 2];
+const parametersToMode2= [1, 'Science: Computers', 2];
 
-// ModeChanger(mode, parametersToMode2);
+// ModeChanger(2, parametersToMode2);
 
 
 
@@ -210,23 +245,7 @@ const testAnswers = [toTestObject.IncorrectAnswers[1][0], toTestObject.CorrectAn
 
 
 
-function getInfoFromHTMLForm(){
 
-    
-
-    console.log('clicked')
-    const categorySelector = document.getElementById('Category').value;
-    const levelSelector = document.getElementById('Level').value;
-    const typeSelector = document.getElementById('Type').value;
-
-    const parametersOfMode2= [categorySelector, levelSelector, typeSelector]
-
-    // console.log(parametersOfMode2)
-
-    ModeChanger(2, parametersOfMode2);
-
-
-}
 
 
 
@@ -234,10 +253,83 @@ function getInfoFromHTMLForm(){
 //#region HTML EVENT HANDLER
 document.getElementById("GameMode1-start").addEventListener("click", mode1Handler);
 
-const Mode2PlayButton = document.getElementById('GameMode2-start');
+document.getElementById('GameMode2-start').addEventListener("click", Mode2);
 
-Mode2PlayButton.addEventListener("click", getInfoFromHTMLForm)
+document.getElementById('Gamemode2-selection').addEventListener("click", ShowFilterForm)
+
+
+// console.log('holaaaaaaaaaaaaaaaaaaaa');
+
+function Reset(){
+    console.log('RESET')
+    console.log(RESET);
+            
+
+    if(RESET !== null){
+                //   gamemode   lvl
+        ModeChanger(RESET[0], RESET[1])
+        console.log(RESET[1]);
+        CURRENT_LVL = RESET[1];
+    }
+    console.log('RESET--------------')
+}
+
+
+function OnclickReset(){
+    console.log('Clicked 2')
+    Reset();
+}
+
+
+function Mode2(){
+    console.log('clicked')
+    HideFilterForm();
+    ModeChanger(2, CategoryFiter());
+    console.log(CategoryFiter());
+}
+
+
+//#endregion   html even Handler    
+
+
+//#region HTML SHOW/HIDE FUNCTIONS
+function ShowCover(){
+
+    document.getElementById('cover').classList.remove('d-none');
+
+}
+
+function HideCover(){
+
+    document.getElementById('cover').classList.add('d-none');
+
+}
+
+function ShowResults(){
+    document.getElementById('results').classList.remove('d-none');
+}
+
+function HideResults(){
+    document.getElementById('results').classList.add('d-none');
+}
+
+function ShowFilterForm(){
+    document.getElementById('FilterForm').classList.remove('d-none');
+    
+}
+
+function HideFilterForm(){
+    document.getElementById('FilterForm').classList.add('d-none');
+    document.getElementById('Gamemode2-selection').classList.add('d-none');
+}
+//#endregion html Show/Hide funcitons
+
+// Mode2PlayButtonStart.addEventListener("click", getInfoFromHTMLForm)
 
 window.getUserAnswers = getUserAnswers;
 
-//#endregion   html even Handler    
+
+
+window.OnclickReset = OnclickReset;
+
+
