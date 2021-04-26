@@ -3,7 +3,6 @@ import RoundSystemMode2 from "./Classes/RoundSystemGameMode2.js"
 import AnswerCheck from "./Classes/AnswerCheck.js";
 import UI from "./Classes/UI.js";
 import DisplayQAs from "./Classes/DisplayQAs.js"
-import PruebaObject from "./Classes/PruebaObject.js"
 
 
 //#region GLOBALS
@@ -70,6 +69,7 @@ function ModeChanger(mode, parameters) {
             ///---- > Here is hapens AFTER! the object is created.
 
             console.log(QUESTIONS_OBJECT);
+
             DisplayQAs.run(QUESTIONS_OBJECT);
             //PruebaObject.run(QUESTIONS_OBJECT);
         
@@ -218,9 +218,6 @@ const testAnswers = [toTestObject.IncorrectAnswers[1][0], toTestObject.CorrectAn
 //#endregion toTEST
 
 
-const Mode2PlayButton = document.getElementById('GameMode2-start');
-
-Mode2PlayButton.addEventListener("click", getInfoFromHTMLForm)
 
 
 function getInfoFromHTMLForm(){
@@ -246,5 +243,9 @@ function getInfoFromHTMLForm(){
 
 //#region HTML EVENT HANDLER
 document.getElementById("GameMode1-start").addEventListener("click", mode1Handler);
+
+const Mode2PlayButton = document.getElementById('GameMode2-start');
+
+Mode2PlayButton.addEventListener("click", getInfoFromHTMLForm)
 
 //#endregion   html even Handler    
