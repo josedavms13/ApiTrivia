@@ -5,6 +5,7 @@ run: function (QUESTIONS_OBJECT){
     
     const randomPosition = displayQAs.answersOrder(QUESTIONS_OBJECT);
     const allAnswersArray = displayQAs.concatAllAnswers(QUESTIONS_OBJECT, randomPosition);
+    let countId = 0;
     
     //----------------------------------------------------
     
@@ -13,7 +14,7 @@ run: function (QUESTIONS_OBJECT){
     Q1.innerHTML = '';
     Q1.innerHTML = QUESTIONS_OBJECT.Questions[0];
     const Answers1 = document.getElementById("Answers1");
-    displayQAs.printAnswers(allAnswersArray[0], "Answers1");
+    countId = displayQAs.printAnswers(allAnswersArray[0], "Answers1", countId);
  
 
     //Ques & Ans 2
@@ -21,7 +22,7 @@ run: function (QUESTIONS_OBJECT){
     Q2.innerHTML = '';
     Q2.innerHTML = QUESTIONS_OBJECT.Questions[1];
     const Answers2 = document.getElementById("Answers2");
-    displayQAs.printAnswers(allAnswersArray[1], "Answers2");
+    countId = displayQAs.printAnswers(allAnswersArray[1], "Answers2", countId);
  
 
     //Ques & Ans 3
@@ -29,14 +30,13 @@ run: function (QUESTIONS_OBJECT){
     Q3.innerHTML = '';
     Q3.innerHTML = QUESTIONS_OBJECT.Questions[2];
     const Answers3 = document.getElementById("Answers3");
-    displayQAs.printAnswers(allAnswersArray[2], "Answers3");
+    countId = displayQAs.printAnswers(allAnswersArray[2], "Answers3", countId);
 
     
 },
 
 
 
-//#region Array completo de repuestas en orden aleatorio 
 answersOrder: function (QUESTIONS_OBJECT){
     const incorrectAnswersArray = QUESTIONS_OBJECT.IncorrectAnswers;
     ////console.log(incorrectAnswersArray)
@@ -89,18 +89,17 @@ concatAllAnswers: function (QUESTIONS_OBJECT, randomPosition){
 
 
 
-
-
-
-printAnswers: function (answers, idName){
+printAnswers: function (answers, idName, countId){
     const divAnswers = document.getElementById(idName);
+    //resetea las respuestas cada ronda
     divAnswers.innerHTML = '';
-    for(let i=0; i < answers.length; i++){
-        divAnswers.innerHTML += `<button onclick="getUserAnswers(this.textContent)">${answers[i]}</button>`
-    }
-}
 
-//#endregion 
+    for(let i=0; i < answers.length; i++){
+        countId += 1;
+        divAnswers.innerHTML += `<button id="A${countId}" onclick="getUserAnswers(this.textContent, this.id)" >${answers[i]}</button>`
+    }
+    return(countId);
+}
 
 }
 
