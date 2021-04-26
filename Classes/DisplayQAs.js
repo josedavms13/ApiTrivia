@@ -95,7 +95,7 @@ printAnswers: function (answers, idName, countId){
     divAnswers.innerHTML = '';
 
     for(let i=0; i < answers.length; i++){
-
+        countId += 1;
         divAnswers.innerHTML += `<button id="A${countId}" onclick="getUserAnswers(this.textContent, this.id)" class="btn btn--start glass glass-btn" >${answers[i]}</button>`
     }
     return(countId);
