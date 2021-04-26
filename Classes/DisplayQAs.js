@@ -32,6 +32,10 @@ run: function (QUESTIONS_OBJECT){
     const Answers3 = document.getElementById("Answers3");
     countId = displayQAs.printAnswers(allAnswersArray[2], "Answers3", countId);
 
+    //Next Button
+    const nextButton = document.getElementById("next-button-div");
+    nextButton.innerHTML = "";
+    nextButton.innerHTML = `<button id="next-button" class="btn btn--start glass glass-btn yellow-color" onclick="showAnswers()">→NEXT←</button>`
     
 },
 

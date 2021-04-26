@@ -122,10 +122,15 @@ function ModeChanger(mode, parameters) {
 
 
 
+//#region Show Answers Box
 
+function showAnswers(){
 
+    document.getElementById("results").classList.remove("d-none");
+    
+}
 
-
+//#endregion
 
 
 //#region  Get Users Answers Function
@@ -201,6 +206,7 @@ function disableAnswers(idName){
 
 
 
+
 //#region  Checking System
 const toTestObject = { 
     Questions: ["In Magic: The Gathering, what term for blocking was established in the Portal set?", "Who is Manchester United&#039;s leading appearance maker?", "Which of the following is used to measure blood pressure?"], 
@@ -263,7 +269,8 @@ document.getElementById('Gamemode2-selection').addEventListener("click", ShowFil
 function Reset(){
     console.log('RESET')
     console.log(RESET);
-            
+
+    document.getElementById("results").classList.add("d-none");        
 
     if(RESET !== null){
                 //   gamemode   lvl
@@ -328,7 +335,7 @@ function HideFilterForm(){
 
 window.getUserAnswers = getUserAnswers;
 
-
+window.showAnswers = showAnswers;
 
 window.OnclickReset = OnclickReset;
 

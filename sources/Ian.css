@@ -278,3 +278,8 @@ option{
     align-items: center;
 }
 
+.yellow-color{
+  background-color: rgba(235, 41, 202, 0.726);
+  border: 2px solid white;
+}
+
