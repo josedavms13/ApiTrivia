@@ -197,4 +197,6 @@ function Mode2(){
 
 window.getUserAnswers = getUserAnswers;
 
+window.getUserAnswers = getUserAnswers;
+
 //#endregion   html even Handler    
