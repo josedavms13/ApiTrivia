@@ -11,7 +11,15 @@ import musicLevel from "./Classes/musicLevel.js"
 
 let QUESTIONS_OBJECT = null;
 
-let CHECKER = null
+let CHECKER = null;
+
+let ISPLAYING = false;
+
+let SAMESONG= false;
+
+let CURRENT_LVL = null;
+
+let RESET = null;
 //#endregion globals
 
 
@@ -47,12 +55,20 @@ function ModeChanger(mode, parameters) {
         //console.log(parameters)
         Questions = new RoundSystem(parameters);
 
-
-
+        
         //PLAY Music
-
+        
+        RESET = [mode, parameters];
         // musicLevel.stop();
-        musicLevel.play(parameters);
+
+        if(CURRENT_LVL !== RESET[1]){
+            console.log('music changes');
+            console.log(CURRENT_LVL);
+            console.log(RESET[1]);
+            // musicLevel.play(parameters);
+            
+        }
+        
 
         //console.log("mode1")
 
@@ -60,6 +76,8 @@ function ModeChanger(mode, parameters) {
     if(mode === 2){
         
         Questions = new RoundSystemMode2(parameters);
+        RESET = [mode, parameters];
+
     }
 
 
@@ -117,7 +135,7 @@ function getUserAnswers(answer){
     if(userAnswers.length < 3){
         userAnswers.push(answer)
     }
-    console
+    
     colorSelectedAnswer(userAnswers);
 }
 
@@ -199,9 +217,29 @@ document.getElementById("GameMode1-start").addEventListener("click", mode1Handle
 document.getElementById('GameMode2-start').addEventListener("click", Mode2);
 
 document.getElementById('Gamemode2-selection').addEventListener("click", ShowFilterForm)
-// Mode2PlayButtonStart
 
 
+// console.log('holaaaaaaaaaaaaaaaaaaaa');
+
+function Reset(){
+    console.log('RESET')
+    console.log(RESET);
+            
+
+    if(RESET !== null){
+                //   gamemode   lvl
+        ModeChanger(RESET[0], RESET[1])
+        console.log(RESET[1]);
+        CURRENT_LVL = RESET[1];
+    }
+    console.log('RESET--------------')
+}
+
+
+function OnclickReset(){
+    console.log('Clicked 2')
+    Reset();
+}
 
 
 function Mode2(){
@@ -253,6 +291,6 @@ window.getUserAnswers = getUserAnswers;
 
 
 
-
+window.OnclickReset = OnclickReset;
 
 
