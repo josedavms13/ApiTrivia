@@ -1,7 +1,7 @@
 const displayQAs = {
 
 
-run: function (QUESTIONS_OBJECT){
+run: function (QUESTIONS_OBJECT, OVERALLVL){
     
     const randomPosition = displayQAs.answersOrder(QUESTIONS_OBJECT);
     const allAnswersArray = displayQAs.concatAllAnswers(QUESTIONS_OBJECT, randomPosition);
@@ -9,6 +9,11 @@ run: function (QUESTIONS_OBJECT){
     
     //----------------------------------------------------
     
+    // Level Display
+    const lvlDisplay = document.getElementById("level-display-div");
+    lvlDisplay.innerHTML = "";
+    lvlDisplay.innerHTML = `<h1 id="level-display">LEVEL: ${OVERALLVL}</h1>`
+
     //Ques & Ans 1
     const Q1 = document.getElementById("Q1");
     Q1.innerHTML = '';
@@ -43,7 +48,8 @@ run: function (QUESTIONS_OBJECT){
 
 answersOrder: function (QUESTIONS_OBJECT){
     const incorrectAnswersArray = QUESTIONS_OBJECT.IncorrectAnswers;
-    ////console.log(incorrectAnswersArray)
+    console.log("...........................")
+    console.log(incorrectAnswersArray)
     const randomPosition = [];
     for(let i=0; i < 3; i++){
         if(incorrectAnswersArray[i].length === 3){
