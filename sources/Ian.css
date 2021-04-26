@@ -226,7 +226,7 @@ html {
 
 .waiting-card{
     position: fixed;
-    top: 20vh;
+    top: 10vh;
     background-color: rgb(37, 16, 85);
 
     height: 60rem;

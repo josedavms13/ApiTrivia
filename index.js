@@ -124,7 +124,7 @@ function ModeChanger(mode, parameters) {
 
 //#region  Get Users Answers Function
 
-const userAnswers = [null,null,null];
+let userAnswers = [null,null,null];
 
 // La función recibe el textContent del botón mediante un "onclick"
 function getUserAnswers(answer, idName){
@@ -171,7 +171,6 @@ function disableAnswers(idName){
     const a = allAnswers[0].length;
     const b = a + allAnswers[1].length;
     const c = b + allAnswers[2].length;
-
     const idNumber = idName.substring(1);
 
     if(idNumber <= a){
@@ -179,12 +178,12 @@ function disableAnswers(idName){
             document.getElementById(`A${i}`).removeAttribute("onclick");
         }
     }
-    if(idNumber >= a && idNumber <= b){
+    if(idNumber > a && idNumber <= b){
         for(let i=a+1; i<=b; i++){
             document.getElementById(`A${i}`).removeAttribute("onclick");
         }
     }
-    if(idNumber >= b && idNumber <= c){
+    if(idNumber > b && idNumber <= c){
         for(let i=b+1; i<=c; i++){
             document.getElementById(`A${i}`).removeAttribute("onclick");
         }
@@ -262,7 +261,7 @@ document.getElementById('Gamemode2-selection').addEventListener("click", ShowFil
 function Reset(){
     console.log('RESET')
     console.log(RESET);
-
+    userAnswers = [null,null,null];
     document.getElementById("results").classList.add("d-none");        
 
     if(RESET !== null){
