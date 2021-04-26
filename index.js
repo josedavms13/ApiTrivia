@@ -61,13 +61,8 @@ function ModeChanger(mode, parameters) {
         RESET = [mode, parameters];
         // musicLevel.stop();
 
-        if(CURRENT_LVL !== RESET[1]){
-            console.log('music changes');
-            console.log(CURRENT_LVL);
-            console.log(RESET[1]);
-            // musicLevel.play(parameters);
-            
-        }
+        PlayMusic(parameters);
+ 
         
 
         //console.log("mode1")
@@ -163,6 +158,7 @@ function colorSelectedAnswer(userAnswer){
 
 
 //#region  Checking System
+
 const toTestObject = { 
     Questions: ["In Magic: The Gathering, what term for blocking was established in the Portal set?", "Who is Manchester United&#039;s leading appearance maker?", "Which of the following is used to measure blood pressure?"], 
     CorrectAnswers: ["Intercepting", "Ryan Giggs", "Sphygmomanometer"], 
@@ -219,7 +215,10 @@ document.getElementById('GameMode2-start').addEventListener("click", Mode2);
 document.getElementById('Gamemode2-selection').addEventListener("click", ShowFilterForm)
 
 
-// console.log('holaaaaaaaaaaaaaaaaaaaa');
+
+
+
+//#region  GLOBAL FUNCTIONS
 
 function Reset(){
     console.log('RESET')
@@ -248,6 +247,27 @@ function Mode2(){
     ModeChanger(2, CategoryFiter());
     console.log(CategoryFiter());
 }
+
+function PlayMusic(level){
+
+    console.log('lvl in music = ' +level)
+
+    console.log('CURRENT in music = ' + CURRENT_LVL)
+
+    if(CURRENT_LVL !== RESET[1]){
+
+        console.log('music change')
+
+
+
+        musicLevel.play(level);
+        
+        CURRENT_LVL = level;
+    }
+
+}
+
+//#endregion global functions
 
 
 //#endregion   html even Handler    
