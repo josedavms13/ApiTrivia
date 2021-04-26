@@ -216,6 +216,14 @@ html {
     padding: 10%;
 }
 
+.mt-2{
+  margin-top: 4vh;
+}
+
+.mb-2{
+  margin-bottom: 4vh;
+}
+
 .waiting-card{
     position: fixed;
     top: 20vh;
@@ -261,7 +269,7 @@ option{
 
 
 .result-container{
-    position: fixed;
+    /* position: fixed; */
     top: 20vh;
     left: 25vw;
 
@@ -281,5 +289,11 @@ option{
 .yellow-color{
   background-color: rgba(235, 41, 202, 0.726);
   border: 2px solid white;
+}
+
+.selection-button-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
