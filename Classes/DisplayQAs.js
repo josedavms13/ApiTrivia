@@ -96,7 +96,7 @@ printAnswers: function (answers, idName){
     const divAnswers = document.getElementById(idName);
     divAnswers.innerHTML = '';
     for(let i=0; i < answers.length; i++){
-        divAnswers.innerHTML += `<button onclick="getUserAnswers(this.textContent)">${answers[i]}</button>`
+        divAnswers.innerHTML += `<button onclick="getUserAnswers(this.textContent)" class="btn btn--start glass glass-btn">${answers[i]}</button>`
     }
 }
 

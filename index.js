@@ -4,6 +4,7 @@ import AnswerCheck from "./Classes/AnswerCheck.js";
 import UI from "./Classes/UI.js";
 import DisplayQAs from "./Classes/DisplayQAs.js"
 import CategoryFiter from "./Classes/CategoryFiter.js"
+import musicLevel from "./Classes/musicLevel.js"
 
 //#region GLOBALS
 
@@ -38,13 +39,21 @@ function mode1Handler(){
 
 ///
 function ModeChanger(mode, parameters) {
-
+    ShowCover();
     console.log(mode);
 
     let Questions = null
     if(mode === 1){
         //console.log(parameters)
         Questions = new RoundSystem(parameters);
+
+
+
+        //PLAY Music
+
+        // musicLevel.stop();
+        musicLevel.play(parameters);
+
         //console.log("mode1")
 
     }
@@ -58,6 +67,8 @@ function ModeChanger(mode, parameters) {
 
 
     setTimeout(() => {
+        
+
         QUESTIONS_OBJECT = Questions.output;
 
         /// --- > Here The QUESTIONS_OBJECT is created
@@ -67,11 +78,12 @@ function ModeChanger(mode, parameters) {
 
 
         setTimeout(() => {
-
+            HideCover();
 
             ///---- > Here is hapens AFTER! the object is created.
 
             console.log(QUESTIONS_OBJECT);
+
 
 
             DisplayQAs.run(QUESTIONS_OBJECT);
@@ -184,20 +196,63 @@ const parametersToMode2= [1, 'Science: Computers', 2];
 //#region HTML EVENT HANDLER
 document.getElementById("GameMode1-start").addEventListener("click", mode1Handler);
 
-const Mode2PlayButton = document.getElementById('GameMode2-start');
+document.getElementById('GameMode2-start').addEventListener("click", Mode2);
 
-Mode2PlayButton.addEventListener("click", Mode2);
+document.getElementById('Gamemode2-selection').addEventListener("click", ShowFilterForm)
+// Mode2PlayButtonStart
+
+
+
 
 function Mode2(){
     console.log('clicked')
+    HideFilterForm();
     ModeChanger(2, CategoryFiter());
     console.log(CategoryFiter());
 }
 
-// Mode2PlayButton.addEventListener("click", getInfoFromHTMLForm)
-
-window.getUserAnswers = getUserAnswers;
-
-window.getUserAnswers = getUserAnswers;
 
 //#endregion   html even Handler    
+
+
+//#region HTML SHOW/HIDE FUNCTIONS
+function ShowCover(){
+
+    document.getElementById('cover').classList.remove('d-none');
+
+}
+
+function HideCover(){
+
+    document.getElementById('cover').classList.add('d-none');
+
+}
+
+function ShowResults(){
+    document.getElementById('results').classList.remove('d-none');
+}
+
+function HideResults(){
+    document.getElementById('results').classList.add('d-none');
+}
+
+function ShowFilterForm(){
+    document.getElementById('FilterForm').classList.remove('d-none');
+    
+}
+
+function HideFilterForm(){
+    document.getElementById('FilterForm').classList.add('d-none');
+    document.getElementById('Gamemode2-selection').classList.add('d-none');
+}
+//#endregion html Show/Hide funcitons
+
+// Mode2PlayButtonStart.addEventListener("click", getInfoFromHTMLForm)
+
+window.getUserAnswers = getUserAnswers;
+
+
+
+
+
+
