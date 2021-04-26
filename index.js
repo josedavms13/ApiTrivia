@@ -97,15 +97,34 @@ function ModeChanger(mode, parameters) {
 
 //#region  Get Users Answers Function
 const userAnswers = [];
-
+// La función recibe el textContent del botón mediante un "onclick"
 function getUserAnswers(answer){
     
     if(userAnswers.length < 3){
         userAnswers.push(answer)
     }
-    console.log(userAnswers);
+    console
+    colorSelectedAnswer(userAnswers);
 }
 
+
+function colorSelectedAnswer(userAnswer){
+    const buttons1 = document.getElementById("Answers1").children;
+    const buttons2 = document.getElementById("Answers2").children;
+    const buttons3 = document.getElementById("Answers3").children;
+    const allButtons = [buttons1, buttons2, buttons3];
+    for(let k=0; k<allButtons.length; k++){
+        for(let i=0; i<allButtons[k].length; i++){
+            for(let j=0; j<userAnswer.length; j++){
+                if(allButtons[k][i].textContent === userAnswer[j]){
+                    allButtons[k][i].classList.add("selectedAnswer");
+                }
+            }
+        }
+    }
+    
+    
+}
 
 //#endregion  
 
