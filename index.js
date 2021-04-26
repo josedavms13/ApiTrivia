@@ -5,22 +5,27 @@ import UI from "./Classes/UI.js";
 import DisplayQAs from "./Classes/DisplayQAs.js"
 import CategoryFiter from "./Classes/CategoryFiter.js"
 import musicLevel from "./Classes/musicLevel.js"
+import levelingSystem from "./Classes/levelingSystem.js"
 
  
 //#region GLOBALS
 
+let NUMB_OF_RIGHT_ANSWERS_DISPLAY = null;
 
 let QUESTIONS_OBJECT = null;
 
-let CHECKER = null;
+let USERANSWERS = null;
 
-let ISPLAYING = false;
-
-let SAMESONG= false;
+let OVERALLVL = 1;
+let STACK = 0;
+//#region MUSIC SYSTEM
 
 let CURRENT_LVL = null;
 
 let RESET = null;
+
+//#endregion music system
+
 //#endregion globals
 
 
@@ -48,6 +53,8 @@ function mode1Handler(){
 
 ///
 function ModeChanger(mode, parameters) {
+
+
     document.getElementById('Selection-Mode-Container').classList.add('d-none');
 
     ShowCover();
@@ -64,7 +71,7 @@ function ModeChanger(mode, parameters) {
         RESET = [mode, parameters];
         // musicLevel.stop();
 
-        PlayMusic(parameters);
+        // PlayMusic(parameters);
  
         
 
@@ -89,6 +96,7 @@ function ModeChanger(mode, parameters) {
 
         /// --- > Here The QUESTIONS_OBJECT is created
 
+        CURRENT_LVL
 
 
 
@@ -137,6 +145,7 @@ function getUserAnswers(answer, idName){
     document.getElementById(idName).classList.add("selectedAnswer");
     disableAnswers(idName);
     
+    USERANSWERS = userAnswers;
     return(userAnswers);
 }
 
@@ -264,6 +273,7 @@ function Reset(){
     userAnswers = [null,null,null];
     document.getElementById("results").classList.add("d-none");        
 
+    RESET[1] = OVERALLVL;
     if(RESET !== null){
                 //   gamemode   lvl
         ModeChanger(RESET[0], RESET[1])
@@ -297,7 +307,7 @@ function PlayMusic(level){
 
     console.log('CURRENT in music = ' + CURRENT_LVL)
 
-    if(CURRENT_LVL !== RESET[1]){
+    if(CURRENT_LVL !== OVERALLVL){
 
         console.log('music change')
 
@@ -308,7 +318,7 @@ function PlayMusic(level){
 
         musicLevel.play(level);
         
-        CURRENT_LVL = level;
+        CURRENT_LVL = OVERALLVL;
     }
 
 }
@@ -333,15 +343,59 @@ function HideCover(){
 }
 
 
-//#region Show Answers Box
+//#region NEXT HANDLER
 
-function showAnswers(){
+// NEXT HANDLER
+function nextHandler(){
 
-    document.getElementById("results").classList.remove("d-none");
+    const answercard = document.getElementById("results");
+    // GET USER ANSWERS
+
+
+    console.log('NEXT HANDLER    ---------');
+    // console.log(USERANSWERS);
+    // console.log(QUESTIONS_OBJECT.CorrectAnswers);
     
+    //#region Checking answers WORKS FINE
+    const rightAnswers  = QUESTIONS_OBJECT.CorrectAnswers;
+    const userAns = USERANSWERS;
+    
+    const checkedAnswers = new AnswerCheck(userAns, rightAnswers).output;
+    
+    // console.log(checkedAnswers);
+
+    const numbOfSucc = checkedAnswers.reduce((a, b) => a + b, 0)
+
+    // console.log(numbOfSucc);
+    //#endregion checking Answers works
+
+
+    answercard.innerHTML = `
+        <h2 class="mt-5">You answered</h2>
+        <h3 class="mt-5" id="Right-Answers-Score">${numbOfSucc} out of 3</h3>
+
+        <div>
+            <button class="btn btn--start glass" onclick="OnclickReset()" id="ResetBTN">Continuar</button>
+        </div>
+    `;
+
+    [OVERALLVL, STACK] = levelingSystem.run(checkedAnswers, CURRENT_LVL, 'leveStorage', STACK);
+    
+
+    console.log('OVERALLVL');
+    console.log(OVERALLVL);
+
+    
+
+    console.log('STACK');
+    console.log(STACK);
+
+    answercard.classList.remove("d-none");
+    
+
 }
 
-//#endregion
+//#endregion next handler
 
 function ShowFilterForm(){
     document.getElementById('FilterForm').classList.remove('d-none');
@@ -358,7 +412,7 @@ function HideFilterForm(){
 
 window.getUserAnswers = getUserAnswers;
 
-window.showAnswers = showAnswers;
+window.nextHandler = nextHandler;
 
 window.OnclickReset = OnclickReset;
 

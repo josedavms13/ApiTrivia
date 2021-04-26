@@ -35,7 +35,7 @@ run: function (QUESTIONS_OBJECT){
     //Next Button
     const nextButton = document.getElementById("next-button-div");
     nextButton.innerHTML = "";
-    nextButton.innerHTML = `<button id="next-button" class="btn btn--start glass glass-btn yellow-color" onclick="showAnswers()">→NEXT←</button>`
+    nextButton.innerHTML = `<button id="next-button" class="btn btn--start glass glass-btn yellow-color" onclick="nextHandler()">→NEXT←</button>`
     
 },
 
