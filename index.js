@@ -190,7 +190,8 @@ Mode2PlayButton.addEventListener("click", Mode2);
 
 function Mode2(){
     console.log('clicked')
-    ModeChanger(2, CategoryFiter())
+    ModeChanger(2, CategoryFiter());
+    console.log(CategoryFiter());
 }
 
 // Mode2PlayButton.addEventListener("click", getInfoFromHTMLForm)

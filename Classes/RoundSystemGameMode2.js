@@ -103,10 +103,12 @@ class RoundSystemMode2{
     }
 
     setType(){
-        if(this.type === 1){
+        console.log('settype')
+        console.log(this.type);
+        if(this.type == 1){
             this.customURL += '&'+'&type=multiple'
         }
-        if(this.type === 2){
+        if(this.type == 2){
             this.customURL += '&'+'&type=boolean'
         }
 
