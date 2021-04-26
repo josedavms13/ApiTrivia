@@ -48,6 +48,8 @@ function mode1Handler(){
 
 ///
 function ModeChanger(mode, parameters) {
+    document.getElementById('Selection-Mode-Container').classList.add('d-none');
+
     ShowCover();
     console.log(mode);
 
@@ -117,15 +119,7 @@ function ModeChanger(mode, parameters) {
 
 
 
-//#region Show Answers Box
 
-function showAnswers(){
-
-    document.getElementById("results").classList.remove("d-none");
-    
-}
-
-//#endregion
 
 
 //#region  Get Users Answers Function
@@ -292,9 +286,13 @@ function Mode2(){
     HideFilterForm();
     ModeChanger(2, CategoryFiter());
     console.log(CategoryFiter());
+
+    // document.getElementById('Selection-Mode-Container').classList.add('d-none');
 }
 
 function PlayMusic(level){
+
+
 
     console.log('lvl in music = ' +level)
 
@@ -304,7 +302,10 @@ function PlayMusic(level){
 
         console.log('music change')
 
-
+        if(document.getElementById('audio')){
+            console.log('STOPED')
+            musicLevel.stop();
+        }
 
         musicLevel.play(level);
         
@@ -332,13 +333,16 @@ function HideCover(){
 
 }
 
-function ShowResults(){
-    document.getElementById('results').classList.remove('d-none');
+
+//#region Show Answers Box
+
+function showAnswers(){
+
+    document.getElementById("results").classList.remove("d-none");
+    
 }
 
-function HideResults(){
-    document.getElementById('results').classList.add('d-none');
-}
+//#endregion
 
 function ShowFilterForm(){
     document.getElementById('FilterForm').classList.remove('d-none');

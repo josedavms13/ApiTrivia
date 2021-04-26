@@ -269,8 +269,8 @@ option{
 
 
 .result-container{
-    /* position: fixed; */
-    top: 20vh;
+    position: fixed;
+    top: 10vh;
     left: 25vw;
 
     width: 50vw;
