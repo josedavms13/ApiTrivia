@@ -11,8 +11,11 @@ if(storaged === null){
     console.log("nullo")
 } */
 
-function wuwu(eee){
-    console.log(eee);
+document.getElementById("see1").removeAttribute("onclick")
+
+function wuwu(text, id){
+    console.log(text);
+    console.log(id)
 }
 
 function se(){

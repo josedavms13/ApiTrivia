@@ -6,6 +6,7 @@ import DisplayQAs from "./Classes/DisplayQAs.js"
 import CategoryFiter from "./Classes/CategoryFiter.js"
 import musicLevel from "./Classes/musicLevel.js"
 
+ 
 //#region GLOBALS
 
 
@@ -123,34 +124,72 @@ function ModeChanger(mode, parameters) {
 
 
 //#region  Get Users Answers Function
-const userAnswers = [];
+
+const userAnswers = [null,null,null];
+
 // La función recibe el textContent del botón mediante un "onclick"
-function getUserAnswers(answer){
+function getUserAnswers(answer, idName){
+
+    const indexInArray = placeAnswerInOrder(idName);
+    userAnswers.splice(indexInArray, 1, answer);
+
+    console.log("Así va:")
+    console.log(userAnswers)
+    document.getElementById(idName).classList.add("selectedAnswer");
+    disableAnswers(idName);
     
-    if(userAnswers.length < 3){
-        userAnswers.push(answer)
-    }
-    
-    colorSelectedAnswer(userAnswers);
+    return(userAnswers);
 }
 
 
-function colorSelectedAnswer(userAnswer){
-    const buttons1 = document.getElementById("Answers1").children;
-    const buttons2 = document.getElementById("Answers2").children;
-    const buttons3 = document.getElementById("Answers3").children;
-    const allButtons = [buttons1, buttons2, buttons3];
-    for(let k=0; k<allButtons.length; k++){
-        for(let i=0; i<allButtons[k].length; i++){
-            for(let j=0; j<userAnswer.length; j++){
-                if(allButtons[k][i].textContent === userAnswer[j]){
-                    allButtons[k][i].classList.add("selectedAnswer");
-                }
-            }
+
+function placeAnswerInOrder(idName){
+    const allAnswers = QUESTIONS_OBJECT.IncorrectAnswers;
+    const a = allAnswers[0].length;
+    const b = a + allAnswers[1].length;
+    const c = b + allAnswers[2].length;
+
+    const idNumber = idName.substring(1);
+
+    if(idNumber <= a){
+        const indexInArray = 0;
+        return(indexInArray);
+    }
+    if(idNumber >= a && idNumber <= b){
+        const indexInArray = 1;
+        return(indexInArray);
+    }
+    if(idNumber >= b && idNumber <= c){
+        const indexInArray = 2;
+        return(indexInArray);
+    }
+
+}
+
+
+function disableAnswers(idName){
+    const allAnswers = QUESTIONS_OBJECT.IncorrectAnswers;
+    const a = allAnswers[0].length;
+    const b = a + allAnswers[1].length;
+    const c = b + allAnswers[2].length;
+
+    const idNumber = idName.substring(1);
+
+    if(idNumber <= a){
+        for(let i=1; i<=a; i++){
+            document.getElementById(`A${i}`).removeAttribute("onclick");
         }
     }
-    
-    
+    if(idNumber >= a && idNumber <= b){
+        for(let i=a+1; i<=b; i++){
+            document.getElementById(`A${i}`).removeAttribute("onclick");
+        }
+    }
+    if(idNumber >= b && idNumber <= c){
+        for(let i=b+1; i<=c; i++){
+            document.getElementById(`A${i}`).removeAttribute("onclick");
+        }
+    }
 }
 
 //#endregion  
